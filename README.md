@@ -27,9 +27,9 @@ The application uses HSQLDB (in-memory) for persistence and initializes schema a
 -----------------------------------------------------------------
 
 📂 Project Structure
-
+```
 myproject/
-├── build.gradle                  # Gradle build configuration
+├── build.gradle# Gradle build configuration
 ├── settings.gradle
 └── src
 ├── main
@@ -58,7 +58,7 @@ myproject/
 │       └── data.sql
 └── test/java/... (if any)
 
-
+```
 -----------------------------------------------------------------
 
 ▶ How to Run
