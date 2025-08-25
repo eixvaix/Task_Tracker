@@ -86,7 +86,7 @@ Base URL: http://localhost:8080/api/tasks
 Method	Endpoint	Description
 GET	/api/tasks	Retrieve all tasks
 GET	/api/tasks/{id}	Retrieve task by ID
-POST	/api/tasks	Create a new task
+POST /api/tasks	Create a new task
 PUT	/api/tasks/{id}	Update an existing task
 DELETE	/api/tasks/{id}	Delete a task
 
