@@ -63,7 +63,7 @@ myproject/
 
 ▶ How to Run
 
-Prerequisites
+Prerequisites 
 •	Java 21+
 •	Gradle (or use included wrapper: ./gradlew)
 
