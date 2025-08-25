@@ -1,5 +1,5 @@
-# **Task Tracker API**
-
+# **Task Tracker**
+```
 A Spring Boot application that provides a simple task management REST API. 
 It allows you to create, update, delete, and retrieve tasks, with optional association to users. 
 The application uses HSQLDB (in-memory) for persistence and initializes schema and sample data on startup.
@@ -23,7 +23,7 @@ The application uses HSQLDB (in-memory) for persistence and initializes schema a
 •	HSQLDB 2.7.3
 •	Gradle
 •	Springdoc OpenAPI (Swagger UI)
-
+```
 -----------------------------------------------------------------
 
 📂 Project Structure
@@ -61,6 +61,7 @@ myproject/
 ```
 -----------------------------------------------------------------
 
+```
 ▶ How to Run
 
 Prerequisites 
@@ -85,10 +86,10 @@ Base URL: http://localhost:8080/api/tasks
 
 Method	Endpoint	Description
 GET	/api/tasks	Retrieve all tasks
-GET	/api/tasks/{id}	Retrieve task by ID
-POST /api/tasks	Create a new task
-PUT	/api/tasks/{id}	Update an existing task
-DELETE	/api/tasks/{id}	Delete a task
+GET	/api/tasks/{id}	 Retrieve task by ID
+POST /api/tasks	 Create a new task
+PUT	/api/tasks/{id}	 Update an existing task
+DELETE /api/tasks/{id}	Delete a task
 
 Sample POST request:
 
@@ -102,16 +103,21 @@ curl -X POST http://localhost:8080/api/tasks \
 "status": "open",
 "createdById": 1
 }'
-
+```
 
 -----------------------------------------------------------------
-
+```
 📦 Database
 •	HSQLDB (in-memory): jdbc:hsqldb:mem:mydb
 •	Schema auto-loaded from: src/main/resources/schema.sql
 •	Sample data from: src/main/resources/data.sql
+```
+📦 Database Structure
+![img_1.png](img_1.png)
 
+```
 Tables:
+
 •	app_user (users)
 •	task (tasks, with optional created_by foreign key)
 
@@ -154,3 +160,4 @@ Ensure:
 •	Switch HSQLDB to file mode for persistence:
 
 spring.datasource.url=jdbc:hsqldb:file:./db/mydb
+```
