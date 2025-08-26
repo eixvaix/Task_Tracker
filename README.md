@@ -77,22 +77,24 @@ To change the port, edit src/main/resources/application.properties:
 
 server.port=8081
 
-
+```
 -----------------------------------------------------------------
 
 🌐 API Endpoints
 
-Base URL: http://localhost:8080/api/tasks
-
-Method	Endpoint	Description
-GET	/api/tasks	Retrieve all tasks
-GET	/api/tasks/{id}	 Retrieve task by ID
-POST /api/tasks	 Create a new task
-PUT	/api/tasks/{id}	 Update an existing task
-DELETE /api/tasks/{id}	Delete a task
-
+Base URL: http://localhost:8080/swagger-ui/index.html
+![img_7.png](img_7.png)
+![img_9.png](img_9.png)
+```
+Method	    Path	          Description
+GET	    /api/tasks	          Retrieve all tasks
+GET	    /api/tasks/{id}	  Retrieve task by ID
+POST        /api/tasks	          Create a new task   **(createdById: 1-3)**
+PUT	    /api/tasks/{id}	  Update an existing task
+DELETE      /api/tasks/{id}	  Delete a task
+```
 Sample POST request:
-
+```
 curl -X POST http://localhost:8080/api/tasks \
 -H "Content-Type: application/json" \
 -d '{
@@ -106,13 +108,13 @@ curl -X POST http://localhost:8080/api/tasks \
 ```
 
 -----------------------------------------------------------------
-```
+
 📦 Database
 •	HSQLDB (in-memory): jdbc:hsqldb:mem:mydb
 •	Schema auto-loaded from: src/main/resources/schema.sql
 •	Sample data from: src/main/resources/data.sql
 ```
-📦 Database Structure
+📦 Database Structure (ER-diagram)
 ![img_1.png](img_1.png)
 
 ```
@@ -121,6 +123,7 @@ Tables:
 •	app_user (users)
 •	task (tasks, with optional created_by foreign key)
 
+```
 -----------------------------------------------------------------
 
 🔍 API Documentation (Swagger UI)
@@ -129,13 +132,8 @@ Once the app is running, access Swagger at:
 
 http://localhost:8080/swagger-ui/index.html
 
-OpenAPI JSON:
-
-http://localhost:8080/v3/api-docs
-
-
 -----------------------------------------------------------------
-
+```
 ⚠ Troubleshooting
 •	Port 8080 already in use:
 Stop the process using:
@@ -151,13 +149,4 @@ Ensure:
 •	OpenApiConfig bean exists.
 •	Entities avoid infinite loops (use @JsonIgnore for bidirectional relationships).
 
------------------------------------------------------------------
-
-✅ Next Steps
-•	Add @Valid validation to DTOs.
-•	Implement unit tests for TaskService.
-•	Containerize with Docker (optional).
-•	Switch HSQLDB to file mode for persistence:
-
-spring.datasource.url=jdbc:hsqldb:file:./db/mydb
 ```

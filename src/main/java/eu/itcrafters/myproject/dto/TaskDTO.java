@@ -1,10 +1,12 @@
 package eu.itcrafters.myproject.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
 import java.time.LocalDate;
 
 public class TaskDTO {
+
+    //@Schema(example = "1")
+    //public Integer id;
 
     @Schema(example = "Write documentation")
     public String title;
@@ -22,5 +24,5 @@ public class TaskDTO {
     public String status;
 
     @Schema(description = "Creator user ID", example = "1")
-    public Integer createdById; // optional
+    public Integer createdById;
 }
