@@ -6,7 +6,7 @@ The application uses HSQLDB (in-memory) for persistence and initializes schema a
 
 -----------------------------------------------------------------
 
-✅ Features
+✅ Features 
 •	RESTful CRUD API for Tasks
 •	DTO-based API for clean JSON responses
 •	In-memory HSQLDB with schema and sample data loaded automatically
