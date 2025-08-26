@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // kaitseb Hibernate proxy väljade eest
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "app_user")
 public class AppUser {
