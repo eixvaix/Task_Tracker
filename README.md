@@ -113,7 +113,7 @@ curl -X POST http://localhost:8080/api/tasks \
 •	HSQLDB (in-memory): jdbc:hsqldb:mem:mydb
 •	Schema auto-loaded from: src/main/resources/schema.sql
 •	Sample data from: src/main/resources/data.sql
-```
+
 📦 Database Structure (ER-diagram)
 ![img_1.png](img_1.png)
 

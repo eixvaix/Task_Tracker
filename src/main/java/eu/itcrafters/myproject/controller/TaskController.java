@@ -1,7 +1,6 @@
 package eu.itcrafters.myproject.controller;
 
 import eu.itcrafters.myproject.dto.TaskDTO;
-import eu.itcrafters.myproject.entity.Task;
 import eu.itcrafters.myproject.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,22 +17,22 @@ public class TaskController {
     }
 
     @GetMapping
-    public List<Task> all() {
+    public List<TaskDTO> all() {
         return service.findAll();
     }
 
     @GetMapping("/{id}")
-    public Task one(@PathVariable Integer id) {
+    public TaskDTO get(@PathVariable Integer id) {
         return service.findById(id);
     }
 
     @PostMapping
-    public Task create(@RequestBody TaskDTO dto) {
+    public TaskDTO create(@RequestBody TaskDTO dto) {
         return service.create(dto);
     }
 
     @PutMapping("/{id}")
-    public Task update(@PathVariable Integer id, @RequestBody TaskDTO dto) {
+    public TaskDTO update(@PathVariable Integer id, @RequestBody TaskDTO dto) {
         return service.update(id, dto);
     }
 

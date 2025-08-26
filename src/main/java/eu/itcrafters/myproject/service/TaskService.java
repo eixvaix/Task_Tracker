@@ -8,6 +8,7 @@ import eu.itcrafters.myproject.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -20,40 +21,56 @@ public class TaskService {
         this.userRepo = userRepo;
     }
 
-    public List<Task> findAll() {
-        return taskRepo.findAll();
+    // ---------- Mapping ----------
+
+    private TaskDTO toDto(Task t) {
+        TaskDTO dto = new TaskDTO();
+        dto.setId(t.getId());
+        dto.setTitle(t.getTitle());
+        dto.setDescription(t.getDescription());
+        dto.setDueDate(t.getDueDate());
+        dto.setPriority(t.getPriority());
+        dto.setStatus(t.getStatus());
+        dto.setCreatedById(t.getCreatedBy() != null ? t.getCreatedBy().getId() : null);
+        return dto;
     }
 
-    public Task findById(Integer id) {
-        return taskRepo.findById(id).orElseThrow();
+    private void apply(Task t, TaskDTO dto) {
+        if (dto.getTitle() != null) t.setTitle(dto.getTitle());
+        if (dto.getDescription() != null) t.setDescription(dto.getDescription());
+        if (dto.getDueDate() != null) t.setDueDate(dto.getDueDate());
+        if (dto.getPriority() != null) t.setPriority(dto.getPriority());
+        if (dto.getStatus() != null) t.setStatus(dto.getStatus());
+        if (dto.getCreatedById() != null) {
+            AppUser u = userRepo.findById(dto.getCreatedById())
+                    .orElseThrow(() -> new IllegalArgumentException("User not found: " + dto.getCreatedById()));
+            t.setCreatedBy(u);
+        }
     }
 
-    public Task create(TaskDTO dto) {
+    // ---------- API methods ----------
+
+    public List<TaskDTO> findAll() {
+        return taskRepo.findAll().stream().map(this::toDto).collect(Collectors.toList());
+    }
+
+    public TaskDTO findById(Integer id) {
+        Task t = taskRepo.findById(id).orElseThrow();
+        return toDto(t);
+    }
+
+    public TaskDTO create(TaskDTO dto) {
         Task t = new Task();
-        t.setTitle(dto.title);
-        t.setDescription(dto.description);
-        t.setDueDate(dto.dueDate);
-        t.setPriority(dto.priority);
-        t.setStatus(dto.status);
-        if (dto.createdById != null) {
-            AppUser u = userRepo.findById(dto.createdById).orElseThrow();
-            t.setCreatedBy(u);
-        }
-        return taskRepo.save(t);
+        apply(t, dto);
+        Task saved = taskRepo.save(t);
+        return toDto(saved);
     }
 
-    public Task update(Integer id, TaskDTO dto) {
-        Task t = findById(id);
-        if (dto.title != null) t.setTitle(dto.title);
-        if (dto.description != null) t.setDescription(dto.description);
-        if (dto.dueDate != null) t.setDueDate(dto.dueDate);
-        if (dto.priority != null) t.setPriority(dto.priority);
-        if (dto.status != null) t.setStatus(dto.status);
-        if (dto.createdById != null) {
-            AppUser u = userRepo.findById(dto.createdById).orElseThrow();
-            t.setCreatedBy(u);
-        }
-        return taskRepo.save(t);
+    public TaskDTO update(Integer id, TaskDTO dto) {
+        Task t = taskRepo.findById(id).orElseThrow();
+        apply(t, dto);
+        Task saved = taskRepo.save(t);
+        return toDto(saved);
     }
 
     public void delete(Integer id) {
