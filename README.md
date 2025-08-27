@@ -85,14 +85,7 @@ server.port=8081
 Base URL: http://localhost:8080/swagger-ui/index.html
 ![img_7.png](img_7.png)
 ![img_9.png](img_9.png)
-```
-Method	    Path	          Description
-GET	    /api/tasks	          Retrieve all tasks
-GET	    /api/tasks/{id}	  Retrieve task by ID
-POST        /api/tasks	          Create a new task   **(createdById: 1-3)**
-PUT	    /api/tasks/{id}	  Update an existing task
-DELETE      /api/tasks/{id}	  Delete a task
-```
+
 Sample POST request:
 ```
 curl -X POST http://localhost:8080/api/tasks \
