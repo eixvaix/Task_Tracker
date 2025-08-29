@@ -102,14 +102,15 @@ Base URL: http://localhost:8080/swagger-ui/index.html
 
 Sample POST request:
 ```bash
-curl -X POST http://localhost:8080/api/tasks -H "Content-Type: application/json" -d '{
-"title": "Write documentation",
-"description": "Add full project README",
-"dueDate": "2025-09-01",
-"priority": "high",
-"status": "open",
-"createdById": 1
-}'
+
+{
+ "title": "TEST document",
+ "description": "Add full project to the TEST",
+ "dueDate": "2025-09-25",
+ "priority": "high",
+ "status": "open",
+ "createdById": 1
+}
 ```
 
 -----------------------------------------------------------------
