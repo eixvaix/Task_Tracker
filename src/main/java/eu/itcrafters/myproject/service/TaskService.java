@@ -3,12 +3,14 @@ package eu.itcrafters.myproject.service;
 import eu.itcrafters.myproject.dto.TaskDTO;
 import eu.itcrafters.myproject.entity.AppUser;
 import eu.itcrafters.myproject.entity.Task;
+import eu.itcrafters.myproject.infrastructure.rest.exception.DataNotFoundException;
 import eu.itcrafters.myproject.repository.AppUserRepository;
 import eu.itcrafters.myproject.repository.TaskRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -43,37 +45,46 @@ public class TaskService {
         if (dto.getStatus() != null) t.setStatus(dto.getStatus());
         if (dto.getCreatedById() != null) {
             AppUser u = userRepo.findById(dto.getCreatedById())
-                    .orElseThrow(() -> new IllegalArgumentException("User not found: " + dto.getCreatedById()));
+                    .orElseThrow(() -> new DataNotFoundException("User not found: " + dto.getCreatedById()));
             t.setCreatedBy(u);
         }
     }
 
     // ---------- API methods ----------
 
+    @Transactional(readOnly = true)
     public List<TaskDTO> findAll() {
-        return taskRepo.findAll().stream().map(this::toDto).collect(Collectors.toList());
+        return taskRepo.findAll().stream().map(this::toDto).toList();
     }
 
+    @Transactional(readOnly = true)
     public TaskDTO findById(Integer id) {
-        Task t = taskRepo.findById(id).orElseThrow();
+        Task t = taskRepo.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("Task not found: " + id));
         return toDto(t);
     }
 
+    @Transactional
     public TaskDTO create(TaskDTO dto) {
         Task t = new Task();
         apply(t, dto);
-        Task saved = taskRepo.save(t);
-        return toDto(saved);
+        return toDto(taskRepo.save(t));
     }
 
+    @Transactional
     public TaskDTO update(Integer id, TaskDTO dto) {
-        Task t = taskRepo.findById(id).orElseThrow();
+        Task t = taskRepo.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("Task not found: " + id));
         apply(t, dto);
-        Task saved = taskRepo.save(t);
-        return toDto(saved);
+        return toDto(taskRepo.save(t));
     }
 
+    @Transactional
     public void delete(Integer id) {
-        taskRepo.deleteById(id);
+        try {
+            taskRepo.deleteById(id);
+        } catch (EmptyResultDataAccessException ex) {
+            throw new DataNotFoundException("Task not found: " + id);
+        }
     }
 }
