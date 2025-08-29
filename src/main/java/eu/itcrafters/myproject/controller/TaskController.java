@@ -2,6 +2,8 @@ package eu.itcrafters.myproject.controller;
 
 import eu.itcrafters.myproject.dto.TaskDTO;
 import eu.itcrafters.myproject.service.TaskService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +29,8 @@ public class TaskController {
     }
 
     @PostMapping
-    public TaskDTO create(@RequestBody TaskDTO dto) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public TaskDTO create(@Valid @RequestBody TaskDTO dto) {
         return service.create(dto);
     }
 

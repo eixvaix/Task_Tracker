@@ -54,7 +54,10 @@ public class TaskService {
 
     @Transactional(readOnly = true)
     public List<TaskDTO> findAll() {
-        return taskRepo.findAll().stream().map(this::toDto).toList();
+        return taskRepo.findAll()
+                .stream()
+                .map(this::toDto)
+                .toList();
     }
 
     @Transactional(readOnly = true)

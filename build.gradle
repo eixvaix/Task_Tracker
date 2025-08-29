@@ -36,16 +36,6 @@ dependencies {
 
     // Swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8'
-
-    // MapStruct
-    implementation 'org.mapstruct:mapstruct:1.6.3'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
-
-}
-
-compileJava {
-    // Ignoring Unmapped Properties (no error, no warning), Inject Spring Components into the Mapper
-    options.compilerArgs += ['-Amapstruct.unmappedTargetPolicy=IGNORE', '-Amapstruct.defaultComponentModel=spring']
 }
 
 tasks.named('test') {
