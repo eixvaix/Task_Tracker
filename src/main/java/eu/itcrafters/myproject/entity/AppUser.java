@@ -3,6 +3,7 @@ package eu.itcrafters.myproject.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -11,11 +12,10 @@ import java.util.List;
 @Table(name = "app_user")
 public class AppUser {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    public Integer getId() { return id; }
 
     @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
