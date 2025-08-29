@@ -97,8 +97,8 @@ server.port=8081
 
 Base URL: http://localhost:8080/swagger-ui/index.html
 
-![img_7.png](img_7.png)
-![img_9.png](img_9.png)
+![img_7.png](docs/img_7.png)
+![img_9.png](docs/img_9.png)
 
 Sample POST request:
 ```bash
@@ -120,7 +120,8 @@ curl -X POST http://localhost:8080/api/tasks -H "Content-Type: application/json"
 - Sample data from: src/main/resources/data.sql
 
 📦 Database Structure (ER-diagram)
-![img_1.png](img_1.png)
+
+![img_1.png](docs/img_1.png)
 
 Tables:
 - app_user (users)
